@@ -1,0 +1,22 @@
+{
+  "name": "rotaserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amiiiirhassan/RotaServer.git"
+  },
+  "author": "miladasghari2016@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amiiiirhassan/RotaServer/issues"
+  },
+  "homepage": "https://github.com/amiiiirhassan/RotaServer#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
