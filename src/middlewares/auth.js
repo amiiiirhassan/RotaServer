@@ -63,7 +63,7 @@ const auth = (req,res,next) => {
 
     })
     .catch(function(err){
-       res.send({err,'error':"has problem in sned sms api"});
+       res.send({err,message:"has problem in sned sms api"});
     }) 
 }
 module.exports = auth;
