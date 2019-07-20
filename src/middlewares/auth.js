@@ -9,17 +9,18 @@ const auth = (req,res,next) => {
     const phoneNumber = req.body.phoneNumber;
     const verifyCode = req.body.verifyCode;
     const token = req.body.token;
-    console.log(token)
     if(token) {
         CheckTokenIsValid(token)
         .then((response) => {
             if(response == true) {
                 res.send({ status: 200,message: "Token is valid"})
             }
-            res.send({ status: 401,message: "Token is wrong,you want hack this user!are you sure ?"})
-            return
+            if(response == false) {
+               res.send({ status: 401,message: "Token is wrong,you want hack this user!are you sure ?"})
+            }
         })
         .catch(err=> console.log(err)) 
+        return
 
     }
     if(verifyCode) {
@@ -63,7 +64,7 @@ const auth = (req,res,next) => {
 
     })
     .catch(function(err){
-       res.send({err,message:"has problem in sned sms api"});
+       res.send({message:"has problem in sned sms api"});
     }) 
 }
 module.exports = auth;
