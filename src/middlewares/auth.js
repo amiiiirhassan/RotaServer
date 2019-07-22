@@ -12,8 +12,8 @@ const auth = (req,res,next) => {
     if(token) {
         CheckTokenIsValid(token)
         .then((response) => {
-            if(response == true) {
-                res.send({ status: 200,message: "Token is valid"})
+            if(response != false) {
+                res.send({ status: 200,currentUser:response,message: "Token is valid"})
             }
             if(response == false) {
                res.send({ status: 401,message: "Token is wrong,you want hack this user!are you sure ?"})
