@@ -6,10 +6,12 @@ const PORT = process.env.PORT || 3000
 const CheckUserVerifyCode = require('./src/components/CheckUserVerifyCode');
 const AddToken = require('./src/components/AddToken');
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+
 app.use(cors())
 const mongoose = require('mongoose')
-const authRouter = require('./src/routes/index');
+const {authRouter,updateUserRouter} = require('./src/routes/index');
 const uri = "mongodb://rota:rota1367@ds345597.mlab.com:45597/rota"
 const client= mongoose.connect(uri,{ useNewUrlParser: true })
 .then(()=> console.log("success connect to db"))
@@ -20,5 +22,6 @@ app.get('/test',(req,res) =>   res.json({notes: "This is your notebook. Edit thi
 );
 
 app.use('/signin',authRouter);
-//AddToken('09379640869');
+app.use('/updateProfile',updateUserRouter);
+
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`))
