@@ -9,7 +9,7 @@ async function UpdateProfile(editedUser) {
         user.weight = editedUser.weight || user.weight || "";
         user.height = editedUser.height || user.height || "";
         user.sex = editedUser.sex || user.sex || "";
-        user.profileImage = editedUser.profileImage || user.profileImage || "";
+       // user.profileImage = editedUser.profileImage || user.profileImage || "";
         await user.save();
         return true
     }

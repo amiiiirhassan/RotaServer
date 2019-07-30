@@ -1,13 +1,18 @@
 const Router = require('express');
 const auth = require ('../middlewares/auth');
 const updateProfile = require('../middlewares/updateProfile');
+const addProfileImage = require('../middlewares/addProfileImage');
 const authRouter = Router();
 const updateUserRouter = Router();
-authRouter.post('/', auth);
+const addProfileImageRouter = Router();
 
+authRouter.post('/', auth);
 updateUserRouter.post('/', updateProfile);
+addProfileImageRouter.post('/', addProfileImage);
 
 module.exports = {
     authRouter,
-    updateUserRouter
+    updateUserRouter,
+    addProfileImageRouter
+
 };

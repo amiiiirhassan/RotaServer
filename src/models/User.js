@@ -10,7 +10,7 @@ const userSchema = new Schema({
     password: String,
     phoneNumber: String,
     token: String,
-    profileImage: String,
+    profileImage: {src: String,imageType: String,name: String},
     verifyCode: Number
 })
 const User = mongoose.model('User',userSchema);

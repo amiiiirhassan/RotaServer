@@ -1,6 +1,5 @@
 const updateUserProfile = require('../components/UpdateProfile');
 const updateProfile = (req,res,next) => {
-    
     const body = req.body;
     const editedUser = {
         token: body.token,
@@ -10,7 +9,7 @@ const updateProfile = (req,res,next) => {
         weight: body.weight,
         height: body.height,
         sex: body.sex,
-        profileImage: body.profileImage
+       // profileImage: body.profileImage
     }
     
     updateUserProfile(editedUser)
