@@ -5,6 +5,7 @@ const AddUser = require('../components/AddUser')
 const CheckUserVerifyCode = require('../components/CheckUserVerifyCode')
 const AddToken = require('../components/AddToken');
 const CheckTokenIsValid = require('../components/CheckTokenIsValid');
+const GetUser = require('../components/GetUser');
 const auth = (req,res,next) => {
     const phoneNumber = req.body.phoneNumber;
     const verifyCode = req.body.verifyCode;
@@ -12,8 +13,8 @@ const auth = (req,res,next) => {
     if(token) {
         CheckTokenIsValid(token)
         .then((response) => {
-            if(response == true) {
-                res.send({ status: 200,message: "Token is valid"})
+            if(response != false) {
+                res.send({ status: 200,currentUser:response,message: "Token is valid"})
             }
             if(response == false) {
                res.send({ status: 401,message: "Token is wrong,you want hack this user!are you sure ?"})
@@ -30,7 +31,20 @@ const auth = (req,res,next) => {
             if(verifyCodeIsValid) {
                 AddToken(phoneNumber)
                 .then((_token) => {
-                    res.send({ status: 200,token: _token ,message: "Authorization success"})
+                    let currentUser = {};
+                    GetUser(phoneNumber)
+                    .then(user => {
+                        if(user.phoneNumber) {
+                            currentUser = user
+                            return currentUser
+                        }
+                        else {
+                            currentUser.phoneNumber = phoneNumber;
+                            return currentUser
+                        }
+                    }) 
+                    .catch(err => err)
+                    res.send({ status: 200,currentUser: currentUser ,token: _token ,message: "Authorization success"})
                 })
                 .catch(err => console.log(err));
             }
