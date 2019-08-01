@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const User = require('../models/User');
 async function CheckTokenIsValid(_token) {
     let user = await User.findOne({ token: _token });
-    console.log(user)
 
     if(user) {
         const _user = {
