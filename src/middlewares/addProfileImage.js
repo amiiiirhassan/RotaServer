@@ -13,7 +13,7 @@ const addProfileImage = async (req,res,next) => {
             });   
         }
 
-            user.profileImage.src = 'http://localhost:3000/'+req.file.path;
+            user.profileImage.src = req.file.path;
             user.profileImage.type = req.file.mimetype;
             user.profileImage.name = req.file.filename;
             await user.save();
