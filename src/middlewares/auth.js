@@ -10,19 +10,22 @@ const auth = (req,res,next) => {
     const phoneNumber = req.body.phoneNumber;
     const verifyCode = req.body.verifyCode;
     const token = req.body.token;
+    console.log("authing!")
     if(token) {
         CheckTokenIsValid(token)
         .then((response) => {
+            console.log(response)
+
             if(response != false) {
-                res.send({ status: 200,currentUser:response,message: "Token is valid"})
+                 res.send({ status: 200,currentUser:response,message: "Token is valid"})
             }
             if(response == false) {
-               res.send({ status: 401,message: "Token is wrong,you want hack this user!are you sure ?"})
+                 res.send({ status: 401,message: "Token is wrong,you want hack this user!are you sure ?"})
             }
         })
-        .catch(err=> console.log(err)) 
-        return
+        .catch(err=> console.log(err))
 
+        return 
     }
     if(verifyCode) {
          CheckUserVerifyCode(phoneNumber,verifyCode)
