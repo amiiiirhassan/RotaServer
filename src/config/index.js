@@ -1,6 +1,5 @@
 module.exports = {
-    'secret' : 'Rot@SuperSecret'
-}
-module.exports = {
+    'secret' : 'Rot@SuperSecret',
     'develop' : false
+
 }

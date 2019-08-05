@@ -21,7 +21,6 @@ const client= mongoose.connect(uri,{ useNewUrlParser: true })
 .catch(err =>console.log("faild connect to db"))
 app.get('/', (req, res) => res.send('Hello World!'))
 
-
 app.get('/test',(req,res) =>   
   res.json({notes: "This is your notebook. Edit this to start saving your notes!"})
 );
