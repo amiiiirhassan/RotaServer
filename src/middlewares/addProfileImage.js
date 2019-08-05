@@ -3,6 +3,7 @@ const fs = require('fs');
 
 const User = require('../models/User');
 const addProfileImage = async (req,res,next) => {
+    console.log("imaging!")
     const _token = req.headers.token;
     let user = await User.findOne({ token: _token });
     if(user) {

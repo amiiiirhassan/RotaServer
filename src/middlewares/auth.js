@@ -6,26 +6,19 @@ const CheckUserVerifyCode = require('../components/CheckUserVerifyCode')
 const AddToken = require('../components/AddToken');
 const CheckTokenIsValid = require('../components/CheckTokenIsValid');
 const GetUser = require('../components/GetUser');
-const auth = (req,res,next) => {
+const auth = async (req,res,next) => {
     const phoneNumber = req.body.phoneNumber;
     const verifyCode = req.body.verifyCode;
     const token = req.body.token;
-    console.log("authing!")
     if(token) {
-        CheckTokenIsValid(token)
-        .then((response) => {
-            console.log(response)
-
-            if(response != false) {
-                 res.send({ status: 200,currentUser:response,message: "Token is valid"})
+        let user = await CheckTokenIsValid(token);
+            if(user != false) {
+                console.log("auth response")
+                return res.send({ status: 200,currentUser:user,message: "Token is valid"})                 
             }
-            if(response == false) {
-                 res.send({ status: 401,message: "Token is wrong,you want hack this user!are you sure ?"})
+            if(user == false) {
+                 return res.send({ status: 401,message: "Token is wrong,you want hack this user!are you sure ?"})    
             }
-        })
-        .catch(err=> console.log(err))
-
-        return 
     }
     if(verifyCode) {
          CheckUserVerifyCode(phoneNumber,verifyCode)

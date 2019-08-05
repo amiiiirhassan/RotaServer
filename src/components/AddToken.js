@@ -1,4 +1,4 @@
-const config = require('../config/config')
+const {config} = require('../config/index')
 const GetRandomNumber = require('../js/GetRandomNumber')
 const User = require('../models/User')
 const jwt = require('jsonwebtoken');
