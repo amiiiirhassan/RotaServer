@@ -31,16 +31,13 @@ const auth = async (req,res,next) => {
                     GetUser(phoneNumber)
                     .then(user => {
                         if(user.phoneNumber) {
-                            currentUser = user
-                            return currentUser
+                            return res.send({ status: 200,currentUser: user ,token: _token ,message: "Authorization success"})    
                         }
                         else {
-                            currentUser.phoneNumber = phoneNumber;
-                            return currentUser
+                            return res.send({ status: 200,currentUser: currentUser ,token: _token ,message: "Authorization success"})    
                         }
                     }) 
                     .catch(err => err)
-                    res.send({ status: 200,currentUser: currentUser ,token: _token ,message: "Authorization success"})
                 })
                 .catch(err => console.log(err));
             }
